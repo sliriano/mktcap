@@ -6,7 +6,7 @@
       <script type="text/javascript" src="/stockData.js"></script>      
    </head>
    
-   <body onload="">
+   <body onload="stocks()">
    <h1 style="text-align: center">MktCap</h1>
     <table id="table" align="center">
         <tr>
