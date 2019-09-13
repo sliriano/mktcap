@@ -2,8 +2,8 @@
 <html>
    <head>
       <title>Mkt Cap - Market Data</title>
-      <link href="/style.css" rel="stylesheet" type="text/css" />
-      <script type="text/javascript" src="/cryptoData.js"></script>      
+      <link href="/mktcap/style.css" rel="stylesheet" type="text/css" />
+      <script type="text/javascript" src="/mktcap/cryptoData.js"></script>      
    </head>
    
    <body onload="fillCryptoData()">
