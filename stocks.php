@@ -37,10 +37,6 @@
       <link href="/mktcap/style.css" rel="stylesheet" type="text/css" />
    </head>
    
-   <script type ="text/javascript">
-   
-   </script>
-   
    <body onload="stocks()">
    <h1 style="text-align: center">MktCap</h1>
     <table id="table" align="center">
@@ -53,7 +49,7 @@
             <th>Shares</th>
             <th>Change (24)</th>
         </tr>
-        <!------Loops through top 160 stocks in database and inserts them into html table------->
+        <!------Loops through top 100 stocks in database and inserts them into html table------->
         <?php foreach($stocks as $stock){ ?>
             <?php 
                 if ($rank === 100) {
