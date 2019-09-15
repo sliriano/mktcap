@@ -1,6 +1,6 @@
 <?php
 // connect to database
-$conn = mysqli_connect('localhost', 'steve', 'INSERT PASSWORD HERE', 'stock_data');
+$conn = mysqli_connect('localhost', 'steve', 'INSERT PASSWORD HERE', 'market_data');
 
 // check connection
 if (!$conn) {

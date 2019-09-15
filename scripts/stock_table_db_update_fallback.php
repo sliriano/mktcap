@@ -21,7 +21,7 @@
     fclose($textfile);
     $data_arr = explode(", ", $file_data);
     /*
-      textfile size is contains 3500 stock tickers,
+      textfile size contains 3500 stock tickers,
       API limits us to 50 stocks per call
       therfore we will loop seventry times
       and within those we will loop 50 times and add 
