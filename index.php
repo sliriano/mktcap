@@ -34,7 +34,6 @@
    <head>
       <title>Mkt Cap - Market Data</title>
       <link href="/mktcap/style.css" rel="stylesheet" type="text/css" />
-      <script type="text/javascript" src="/mktcap/cryptoData.js"></script>      
    </head>
    
    <body >
