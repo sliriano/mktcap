@@ -1,4 +1,9 @@
 <?php
+    $page = intval($_GET['page']);
+    // range of the market cap ranks that will be displayed on this page
+    // ex) page 2 would have coins ranked [100, 200]
+    $range = [($page-1)*100, ($page)*100];
+    
     // connect to database
     $conn = mysqli_connect('localhost', 'steve', 'INSERT PASSWORD HERE', 'market_data');
 
@@ -13,13 +18,13 @@
 
     // feth the resulting rows as an array, reverse the array to descending order
     $coins = array_reverse(mysqli_fetch_all($result, MYSQLI_ASSOC));
-    
+    $coins = array_slice($coins, $range[0], $range[1]+1);
     // free result from memory
     mysqli_free_result($result);
     //close connection to database
     mysqli_close($conn);
     
-    $rank =0;
+    $rank = $range[0];
     function percent_color($num) {
         if ($num < 0) {
             return "#e15241";
@@ -38,8 +43,9 @@
    
    <body >
    <h1 style="margin-left:15%;margin-right:15%;text-align: left">MktCap</h1>
-   <br/>
+   <br />
 
+    <!------nav bar------>
    <div style="margin-left: 15%;">
    <ul>
     <li><a class="active" href="index.php">Crypto</a></li>
@@ -47,8 +53,6 @@
     <li><a href="forex.php">Forex</a></li>
    </ul>
    </div>
-
-    <br/>
 
     <table id="table" align="center">
         <tr>
@@ -63,7 +67,7 @@
         <!------Loops through top 100 coins in database and inserts them into html table------->
         <?php foreach($coins as $coin){ ?>
             <?php 
-                if ($rank === 100) {
+                if ($rank === $range[1]) {
                     break;
                 }
             ?>
@@ -87,9 +91,26 @@
     </table>
     
     <br />
+    <?php
+    // establishes url for previous 100 link 
+    $prev_url = "";
+        if($page === 2) {
+            $prev_url = "index.php";
+        }
+        else {
+            $prev_url = "page.php?page=".strval(($page-1));
+        }
+    ?>
+    <!---------left button / previous 100 coin------------>
+    <div align= "right">
+    <span align = "left" style="margin-left: 15%;">
+    <a href = <?php echo $prev_url?> class = "button">Previous 100</a>
+    </span>
 
-    <div align = "right" style="margin-right: 15%;">
-    <a href = "page.php?page=2"class = "button">Next 100</a>
+    <!----------right button / next 100 coins------------->
+    <span align = "right" style="margin-right: 15%;">
+    <a href = <?php echo "page.php?page=".strval($page+1)?> class = "button">Next 100</a>
+    </span>
     </div>
    </body>
 

@@ -7,7 +7,7 @@
         echo 'Connection error: ' . mysqli_connect_error();
     }
 
-    // query for getting the top 100 currencies in db
+    // query for getting the top currencies in db
     $sql = 'SELECT * FROM forex ORDER BY id';
     $result = mysqli_query($conn, $sql);
 
@@ -37,7 +37,18 @@
    </head>
    
    <body >
-   <h1 style="text-align: center">MktCap</h1>
+   <h1 style="margin-left:15%;margin-right:15%;text-align: left">MktCap</h1>
+   <br />
+   <!----nav bar----->
+   <div style="margin-left: 15%;">
+   <ul>
+    <li><a href="index.php">Crypto</a></li>
+    <li><a href="stocks.php">Stocks</a></li>
+    <li><a class = "active" href="forex.php">Forex</a></li>
+   </ul>
+   </div>
+
+    <!-----table of currency pairs---->
     <table id="table" align="center">
         <tr>
             <th>#</th>

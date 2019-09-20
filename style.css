@@ -19,3 +19,47 @@ tr{
     border-top: 1px solid #dddddd;
     border-collapse: collapse;
 }
+
+
+/*Button Styling*/
+.button {
+    background-color: lightgray; 
+    border: none;
+    color: black;
+    font-size: 10px;
+    border-radius: 4px;
+    padding: 12px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.button:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/*Nav Bar Styling*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+}
+  
+li {
+    float:left;
+}
+  
+li a {
+    display: block;
+    color: #1070e0;;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+  
+li a:hover {
+    background-color: lightgray;
+}
+

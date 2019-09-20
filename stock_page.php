@@ -1,4 +1,9 @@
 <?php
+    $page = intval($_GET['page']);
+    // range of the market cap ranks that will be displayed on this page
+    // ex) page 2 would have coins ranked [100, 200]
+    $range = [($page-1)*100, ($page)*100];
+    
     // connect to database
     $conn = mysqli_connect('localhost', 'steve', 'INSERT PASSWORD HERE', 'market_data');
 
@@ -7,19 +12,19 @@
         echo 'Connection error: ' . mysqli_connect_error();
     }
 
-    // query for getting the top 100 stocks in db
+    // query for getting the top 100 coins in db
     $sql = 'SELECT * FROM stocks ORDER BY marketcap';
     $result = mysqli_query($conn, $sql);
 
     // feth the resulting rows as an array, reverse the array to descending order
     $stocks = array_reverse(mysqli_fetch_all($result, MYSQLI_ASSOC));
-    
+    $stocks = array_slice($stocks, $range[0], $range[1]+1);
     // free result from memory
     mysqli_free_result($result);
     //close connection to database
     mysqli_close($conn);
     
-    $rank =0;
+    $rank = $range[0];
     function percent_color($num) {
         if ($num < 0) {
             return "#e15241";
@@ -40,8 +45,7 @@
    <body>
    <h1 style="margin-left:15%;margin-right:15%;text-align: left">MktCap</h1>
    <br />
-
-   <!-----nav bar----->
+      <!------nav bar------>
    <div style="margin-left: 15%;">
    <ul>
     <li><a href="index.php">Crypto</a></li>
@@ -50,7 +54,6 @@
    </ul>
    </div>
 
-   <!------table of stocks-------->
     <table id="table" align="center">
         <tr>
             <th>#</th>
@@ -61,10 +64,10 @@
             <th>Shares</th>
             <th>Change (24)</th>
         </tr>
-        <!------Loops through top 100 stocks in database and inserts them into html table------->
+        <!------Loops through stocks and inserts them into html table------->
         <?php foreach($stocks as $stock){ ?>
             <?php 
-                if ($rank === 100) {
+                if ($rank === $range[1]) {
                     break;
                 }
             ?>
@@ -84,12 +87,29 @@
             </tr>
         <?php } ?>
     </table>
+    
     <br />
+    <?php
+    // establishes url for previous 100 link 
+    $prev_url = "";
+        if($page === 2) {
+            $prev_url = "stocks.php";
+        }
+        else {
+            $prev_url = "stock_page.php?page=".strval(($page-1));
+        }
+    ?>
+    <!---------left button / previous 100 coin------------>
+    <div align= "right">
+    <span align = "left" style="margin-left: 15%;">
+    <a href = <?php echo $prev_url?> class = "button">Previous 100</a>
+    </span>
 
-    <div align = "right" style="margin-right: 15%;">
-    <a href = "stock_page.php?page=2"class = "button">Next 100</a>
+    <!----------right button / next 100 coins------------->
+    <span align = "right" style="margin-right: 15%;">
+    <a href = <?php echo "stock_page.php?page=".strval($page+1)?> class = "button">Next 100</a>
+    </span>
     </div>
-
    </body>
 
 </html>

@@ -13,6 +13,7 @@ for ($i = 0; $i < 10; $i++) {
     $crypto_data = json_decode($crypto_data, true);
     for ($coin_index = 0; $coin_index < count($crypto_data); $coin_index++) {
         $name = $crypto_data[$coin_index]['name'];
+        $coin_id = $crypto_data[$coin_index]['id'];
         $ticker = strtoupper($crypto_data[$coin_index]['symbol']);
         $marketcap = $crypto_data[$coin_index]['market_cap'];
         $price = $crypto_data[$coin_index]['current_price'];
@@ -21,7 +22,7 @@ for ($i = 0; $i < 10; $i++) {
         $change24h = $crypto_data[$coin_index]['price_change_percentage_24h'];
         $url = $crypto_data[$coin_index]['image'];
         // attempt to insert data to database
-        $sql = "REPLACE INTO crypto (cryptocurrency_name, ticker, marketcap, price, volume, supply, change24h, image_url) VALUES ('$name', '$ticker', $marketcap, $price, $volume, $supply, $change24h, '$url')";
+        $sql = "REPLACE INTO crypto (rank, id, cryptocurrency_name, ticker, marketcap, price, volume, supply, change24h, image_url) VALUES (null, '$coin_id', '$name', '$ticker', $marketcap, $price, $volume, $supply, $change24h, '$url')";
         if (mysqli_query($conn, $sql)) {
             echo "New record created successfully";
         } else {
