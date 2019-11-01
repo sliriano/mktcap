@@ -5,7 +5,7 @@
     $range = [($page-1)*100, ($page)*100];
     
     // connect to database
-    $conn = mysqli_connect('localhost', 'steve', 'INSERT PASSWORD HERE', 'market_data');
+    $conn = mysqli_connect('ip_address', 'user', 'password', 'market_data');
 
     // check connection
     if (!$conn) {
@@ -90,7 +90,7 @@
     
     <br />
     <?php
-    // establishes url for previous 100 link 
+    // establishes url for the "previous 100" link 
     $prev_url = "";
         if($page === 2) {
             $prev_url = "stocks.php";
@@ -99,13 +99,13 @@
             $prev_url = "stock_page.php?page=".strval(($page-1));
         }
     ?>
-    <!---------left button / previous 100 coin------------>
+    <!---------left button / previous 100 stocks------------>
     <div align= "right">
     <span align = "left" style="margin-left: 15%;">
     <a href = <?php echo $prev_url?> class = "button">Previous 100</a>
     </span>
 
-    <!----------right button / next 100 coins------------->
+    <!----------right button / next 100 stocks------------->
     <span align = "right" style="margin-right: 15%;">
     <a href = <?php echo "stock_page.php?page=".strval($page+1)?> class = "button">Next 100</a>
     </span>

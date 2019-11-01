@@ -57,9 +57,11 @@ li a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
   
 li a:hover {
     background-color: lightgray;
 }
 
+h1, h2, h3 {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}

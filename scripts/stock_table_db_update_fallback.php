@@ -10,7 +10,7 @@
     */
     
     // connect to database
-    $conn = mysqli_connect('localhost', 'steve', 'INSERT PASSWORD HERE', 'stock_data');
+    $conn = mysqli_connect('ip', 'user', 'password', 'market_data');
     // check connection
     if (!$conn) {
         echo 'Connection error: ' . mysqli_connect_error();
@@ -23,7 +23,7 @@
     /*
       textfile size contains 3500 stock tickers,
       API limits us to 50 stocks per call
-      therfore we will loop seventry times
+      therfore we will loop seventy times
       and within those we will loop 50 times and add 
       50 tickers to a string to use for an api call.
     */
@@ -41,11 +41,10 @@
             $start_index = strpos($concatenated_tickers, ",") + 1;
             $concatenated_tickers = substr($concatenated_tickers, $start_index);
         }
-        // remove extra comma on end of string, then remove all string quotes
         $concatenated_tickers = substr($concatenated_tickers, 0, -1);
         $concatenated_tickers = str_replace("'", "", $concatenated_tickers);
-        // fetch and format api data
-        $api_data = file_get_contents("https://api.worldtradingdata.com/api/v1/stock?symbol=".$concatenated_tickers.".L&api_token=SFPEhW2FhtpmOkmGBlM6n1Sv0fesimu4ZP9dMo6dLhkgNFWEbJ1TIihQgBJo");
+
+        $api_data = file_get_contents("https://api.worldtradingdata.com/api/v1/stock?symbol=".$concatenated_tickers."&api_token=SFPEhW2FhtpmOkmGBlM6n1Sv0fesimu4ZP9dMo6dLhkgNFWEbJ1TIihQgBJo");
         $api_data = json_decode($api_data, true);
         $api_data = $api_data['data'];
     
@@ -60,7 +59,7 @@
             $shares = intval($api_data[$stock_index]['shares']);
             $change24h = floatval($api_data[$stock_index]['change_pct']);
             // attempt to insert data to database
-            $sql = "INSERT INTO stocks (stock_name, ticker, marketcap, price, volume, shares, change24h) VALUES ('$stock_name', '$ticker', $market_cap, $price, $volume, $shares, $change24h)";
+            $sql = "REPLACE INTO stocks (stock_name, ticker, marketcap, price, volume, shares, change24h) VALUES ('$stock_name', '$ticker', $market_cap, $price, $volume, $shares, $change24h)";
             if (mysqli_query($conn, $sql)) {
                 echo "New record created successfully";
             } else {

@@ -1,6 +1,6 @@
 <?php 
 // connect to database
-$conn = mysqli_connect('localhost', 'steve', 'INSERT PASSWORD HERE', 'market_data');
+$conn = mysqli_connect('ip_address', 'user', 'password', 'market_data');
 
 // check connection
 if (!$conn) {
@@ -19,7 +19,7 @@ for ($i = 0; $i < count($forex_data); $i++) {
     $high = $forex_data[$i]['high'];
     $changes = $forex_data[$i]['changes'];
     // attempt to insert data to database
-    $sql = "REPLACE INTO forex (pair, bid, ask, open, low, high, changes) VALUES ('$name', $bid, $ask, $open, $low, $high, $changes)";
+    $sql = "INSERT INTO forex (pair, bid, ask, open, low, high, changes) VALUES ('$name', $bid, $ask, $open, $low, $high, $changes)";
     if (mysqli_query($conn, $sql)) {
         echo "New record created successfully";
     } else {

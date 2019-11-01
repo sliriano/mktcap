@@ -5,7 +5,7 @@
     $range = [($page-1)*100, ($page)*100];
     
     // connect to database
-    $conn = mysqli_connect('localhost', 'steve', 'INSERT PASSWORD HERE', 'market_data');
+    $conn = mysqli_connect('ip_address', 'user', 'password', 'market_data');
 
     // check connection
     if (!$conn) {

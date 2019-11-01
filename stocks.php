@@ -1,6 +1,6 @@
 <?php
     // connect to database
-    $conn = mysqli_connect('localhost', 'steve', 'INSERT PASSWORD HERE', 'market_data');
+    $conn = mysqli_connect('ip_address', 'user', 'password', 'market_data');
 
     // check connection
     if (!$conn) {
@@ -72,8 +72,10 @@
             <tr>
                 <td><?php echo $rank?></td>
                 <td>
-                <img  height=18 width=18 src='https://storage.googleapis.com/iex/api/logos/<?php echo $stock['ticker']?>.png'/>
-                <?php echo htmlspecialchars($stock['stock_name'])?> 
+                <img height=18 width=18 src='https://storage.googleapis.com/iex/api/logos/<?php echo $stock['ticker']?>.png'/>
+                <a style="text-decoration:none;color:black;"href="search_stock.php?stock=<?php echo $stock['ticker']?>">
+                <?php echo htmlspecialchars($stock['stock_name'])?>
+                </a> 
                 <?php echo " "."(".htmlspecialchars($stock['ticker']).")"?>
                 </td>
                 <td><?php echo '$'.number_format($stock['marketcap'], 2, '.', ',')?></td>
